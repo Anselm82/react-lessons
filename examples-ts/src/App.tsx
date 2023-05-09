@@ -9,8 +9,10 @@ function App() {
   return (
     <div className="App">
 
-        {!open ? <Contacts />: <AddContact onClose={toggle} />}
+        {!open ? <><Contacts />
         <button type="button" onClick={toggle}>Add Contact</button>
+        </> : <AddContact onClose={toggle} />}
+        
     </div>
   );
 }
