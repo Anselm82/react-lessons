@@ -1,5 +1,5 @@
 import { useState } from "react";
-import contactsJson from "./contacts.json";
+import contactsJson from "./mocks/contacts.json";
 
 export const useContacts = () => {
 
@@ -18,7 +18,7 @@ export const useContacts = () => {
     };
 
     return {
-        contacts,
+        contacts: filtered.length === 0 ? contacts : filtered,
         filtered,
         save,
         search

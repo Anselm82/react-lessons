@@ -7,9 +7,13 @@ export const AddContactForm: FC<{
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+
   return (
-    <>
+    <div className="addForm">
+      <h2 className="list-header">Add new contact</h2>
       <input
+        className="inputField"
+        placeholder="Type the name..."
         type="text"
         id="contact-name"
         onChange={(e) => {
@@ -17,37 +21,44 @@ export const AddContactForm: FC<{
         }}
       />
       <input
+      className="inputField"
         type="text"
+        placeholder="Type the phone..."
         id="contact-phone"
         onChange={(e) => {
           setPhone(e.target.value);
         }}
       />
       <input
+      className="inputField"
         type="text"
         id="contact-email"
+        placeholder="Type the email..."
         onChange={(e) => {
           setEmail(e.target.value);
         }}
       />
-      <br />
-      <button id="close" onClick={onClose}>
+      <div className="actions">
+      <button id="close" className="styledButton" onClick={onClose}>
         Close
       </button>
-      <br />
+
       <button
         id="add"
-        onClick={() =>
+        className="styledButton"
+        onClick={() =>{
           onSave({
             id: 0,
             name: name,
             phone: phone,
             email: email,
           })
+          onClose()}
         }
       >
         Save
       </button>
-    </>
+      </div>
+    </div>
   );
 };
