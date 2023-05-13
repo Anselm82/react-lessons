@@ -5,13 +5,24 @@ import { AddContact, AddContactForm } from "../AddContact";
 
 export const Contacts: React.FC = () => {
   const { open, toggle } = useToggleButton();
+  const { open: openEdit, toggle: toggleEdit } = useToggleButton();
   const { contacts, save, remove, search, selected, select, reset } = useContacts();
 
+  const handleClose = () => {
+    toggleEdit();
+    reset();
+  }
+
+  const handleEdit = (contact: Contact) => {
+    select(contact)
+    toggleEdit();
+  }
+  
   return (
     <main>
       <h1 className="title">Contacts</h1>
       <SearchBar onSearch={search} />
-      <ContactList contacts={contacts} remove={remove} onEdit={select}/>
+      <ContactList contacts={contacts} remove={remove} onEdit={handleEdit}/>
       {!open ? (
         <button type="button" onClick={toggle} className="styledButton">
           Add Contact
@@ -19,7 +30,7 @@ export const Contacts: React.FC = () => {
       ) : (
         <AddContact onClose={toggle} onSave={save}/>
       )}
-      {selected && <AddContactForm mode={"edit"} contact={selected} onClose={() => reset} onSave={save} />}
+      {selected && openEdit && <AddContactForm mode={"edit"} contact={selected} onClose={handleClose} onSave={save} />}
     </main>
   );
 };

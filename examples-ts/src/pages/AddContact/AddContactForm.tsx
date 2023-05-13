@@ -1,8 +1,8 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 export const AddContactForm: FC<{
-  mode: "edit" | "add"
-  contact: Contact
+  mode: "edit" | "add";
+  contact: Contact;
   onClose: () => void;
   onSave: (contact: Contact) => void;
 }> = ({ mode = "add", contact, onClose, onSave }) => {
@@ -11,9 +11,20 @@ export const AddContactForm: FC<{
   const [email, setEmail] = useState(contact.email);
   const [username, setUsername] = useState(contact.username);
   const [website, setWebsite] = useState(contact.website);
+
+  useEffect(() => {
+    setName(contact.name);
+    setPhone(contact.phone);
+    setEmail(contact.email);
+    setUsername(contact.username);
+    setWebsite(contact.website);
+  }, [contact]);
+
   return (
     <div className="addForm">
-      <h2 className="list-header">{mode === "add" ? "Add new" : "Edit"} contact</h2>
+      <h2 className="list-header">
+        {mode === "add" ? "Add new" : "Edit"} contact
+      </h2>
       <input
         className="inputField"
         value={name}
