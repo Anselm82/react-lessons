@@ -1,24 +1,13 @@
 import { SearchBar, ContactList } from "./components";
 import { useToggleButton } from "./hooks/useToggleButton";
 import { useContacts } from "./useContacts";
-import { AddContact, AddContactForm } from "../AddContact";
+import { AddContact } from "../AddContact";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 
 export const Contacts: React.FC = () => {
   const { open, toggle } = useToggleButton();
-  const { open: openEdit, toggle: toggleEdit } = useToggleButton();
-  const { contacts, save, remove, search, selected, select, reset } = useContacts();
-
-  const handleClose = () => {
-    toggleEdit();
-    reset();
-  }
-
-  const handleEdit = (contact: Contact) => {
-    select(contact)
-    toggleEdit();
-  }
+  const { contacts, save, remove, search } = useContacts();
   
   const { theme, toggleTheme } = useContext(ThemeContext);
   
@@ -37,7 +26,7 @@ export const Contacts: React.FC = () => {
       <button onClick={toggleTheme} className="styledButton">
         Change theme to {theme === 'light' ? 'Dark mode' : 'Light mode'}
       </button>
-      <ContactList contacts={contacts} remove={remove} onEdit={handleEdit}/>
+      <ContactList contacts={contacts} remove={remove}/>
       {!open ? (
         <button type="button" onClick={toggle} className="styledButton">
           Add Contact
@@ -45,7 +34,6 @@ export const Contacts: React.FC = () => {
       ) : (
         <AddContact onClose={toggle} onSave={save}/>
       )}
-      {selected && openEdit && <AddContactForm mode={"edit"} contact={selected} onClose={handleClose} onSave={save} />}
     </main>
   );
 };

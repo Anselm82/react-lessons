@@ -1,25 +1,31 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
-export const ContactCard: FC<{ contact: Contact, remove: () => void, onCardClicked: () => void }> = ({ contact, remove, onCardClicked }) => {
-
+export const ContactCard: FC<{
+  contact: Contact;
+  remove: () => void;
+}> = ({ contact, remove }) => {
+  
   const handleClose = (event: any) => {
     event.preventDefault();
-    remove()
-  }
+    remove();
+  };
 
-  const handleClick = (event: any) => {
-    event.preventDefault();
-    onCardClicked()
-  }
   return (
     <div className="listItem">
-      <div onClick={handleClick}>
-      <div className="infoField" id="contact-name">Name: {contact.name}</div>
-      <div className="infoField" id="contact-phone">Phone: {contact.phone}</div>
-      <div className="infoField" id="contact-email">Email: {contact.email}</div>
-      </div>
+      <Link to={`/contact/${contact.id}`}>
+        <div className="infoField" id="contact-name">
+          Name: {contact.name}
+        </div>
+        <div className="infoField" id="contact-phone">
+          Phone: {contact.phone}
+        </div>
+        <div className="infoField" id="contact-email">
+          Email: {contact.email}
+        </div>
+      </Link>
       <button type="button" onClick={handleClose} className="styledButton">
-          Remove contact
+        Remove contact
       </button>
     </div>
   );
