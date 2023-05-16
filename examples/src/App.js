@@ -1,40 +1,44 @@
 // Imports
-import { useEffect, useState } from "react";
+import { useState } from "react"
 import "./App.css"
+
+import { Routes, Route } from "react-router-dom"
 
 import Header from "./components/Header"
 import CharacterList from "./components/CharacterList"
+import Home from "./components/Home"
+import Contact from "./components/Contact"
+import CharacterDetail from "./components/CharacterDetail"
+import NoMatch from "./components/NoMatch"
+import Menu from "./components/Menu"
 
+import useFetch from "./hooks/useFetch"
 import AddCharacterContext from "./contexts/AddCharacterContext"
 
 // Function
 const App = () => {
-  const [characters, setCharacters] = useState([])
-  let [maximum, setMaximum] = useState(0)
-  
+
+  // Private states & functions
+  // const [urlData, setUrlData] = useState("https://jsonplaceholder.typicode.com/users")
+  const [maximum, setMaximum] = useState(0)
   const increaseMaximum = () => setMaximum(maximum+1)
+
+  // const changeUrlData = (start, end) => {
+  //   setUrlData("https://jsonplaceholder.typicode.com/users?start=" +
+  //               start + "&end=" + end)
+  // }
   
   // Initialize data
   const titleApp = "Feliz Día de Goku"
-
-  // Side effect
-  useEffect(() => {
-
-    // Retrieve data
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then(response => response.json())
-      .then(data => {
-        const dataFormatted = data.map(person => {
-          return {
-            name: person.name,
-            race: person.id % 2 === 0 ? "supersaiyan": "human"
-          }
-        })
-
-        setCharacters(dataFormatted)
-      })
-
-  }, []) // <---------- First render
+  
+  // Retrieve data
+  const [
+    characters,
+    setCharacters,
+    loadingCharacters,
+    errorCharacters
+  // ] = useFetch(urlData)
+  ] = useFetch("https://jsonplaceholder.typicode.com/users")
   
   return (
     <div>
@@ -45,12 +49,27 @@ const App = () => {
       />
 
       <hr />
-      
-      <AddCharacterContext.Provider
-        value={{characters, setCharacters}}>
 
-        <CharacterList maximum={maximum} />
-      </AddCharacterContext.Provider>
+      <Menu />
+
+      <hr />
+
+      <Routes>
+        <Route path="/" element={ <Home /> } />
+        <Route path="characters" element={
+          <AddCharacterContext.Provider value={{
+            characters,
+            setCharacters,
+            loadingCharacters,
+            errorCharacters
+          }}>
+            <CharacterList />
+          </AddCharacterContext.Provider>
+        } />
+        <Route path="contact" element={ <Contact /> } />
+        <Route path="character/:id" element={ <CharacterDetail /> } />
+        <Route path="*" element={ <NoMatch /> } />
+      </Routes>
     </div>
   )
 }

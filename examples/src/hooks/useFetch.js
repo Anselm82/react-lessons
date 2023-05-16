@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"
 
-const useFetch = (url, callbackFunction) => {
-  const [limit, setLimit] = useState(3)
+const useFetch = url => {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      callbackFunction()
-    })
-    .catch(() => {
-      setLimit(limit-1)
+  useEffect(() => {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        setData(data)
+        setLoading(false)
+      })
+      .catch(() => setError(true))
+  }, [url])
 
-      // Volver a pedir datos
-    })
+  return [data, setData, loading, error]
 }
 
 export default useFetch
