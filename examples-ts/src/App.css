@@ -112,3 +112,18 @@ main {
   margin: auto;
 }
 
+.home {
+  height: 100vh;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.home img {
+  cursor: pointer;
+}
+
+.homeTitle {
+  font-size: 36px;
+}

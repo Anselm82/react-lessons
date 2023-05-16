@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 export const Home: FC<{}> = () => {
   return (
     <div className="home">
-      <img src="logo.webp" alt="MacContacts" />
-        <Link to={"contacts"}>Contactos</Link>
-        <Link to={"/"}>Home</Link>
+        <div className="homeTitle">MacContactos</div>
+        <Link to={"contacts"}>
+            <img src="logo.webp" alt="MacContacts" height={200} width={200} />
+        </Link>
     </div>
   );
 };
