@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import { Button } from "../../components/StyledComponents";
 
 export const AddContactForm: FC<{
   mode: "edit" | "add";
@@ -76,13 +77,12 @@ export const AddContactForm: FC<{
         }}
       />
       <div className="actions">
-        <button id="close" className="styledButton" onClick={onClose}>
+        <Button id="close" onClick={onClose}>
           Close
-        </button>
+        </Button>
 
-        <button
+        <Button
           id="add"
-          className="styledButton"
           onClick={() => {
             onSave({
               id: contact.id,
@@ -96,7 +96,7 @@ export const AddContactForm: FC<{
           }}
         >
           Save
-        </button>
+        </Button>
       </div>
     </div>
   );

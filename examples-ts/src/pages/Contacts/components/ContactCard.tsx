@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "../../../components/StyledComponents";
 
 export const ContactCard: FC<{
   contact: Contact;
@@ -24,9 +25,9 @@ export const ContactCard: FC<{
           Email: {contact.email}
         </div>
       </Link>
-      <button type="button" onClick={handleClose} className="styledButton">
+      <Button type="button" onClick={handleClose}>
         Remove contact
-      </button>
+      </Button>
     </div>
   );
 };

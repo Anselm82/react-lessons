@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContactDetailViewModel } from "./useContactDetailViewModel";
+import { Button } from "../../components/StyledComponents";
 
 export const ContactDetail: FC<{
   mode: "edit" | "add";
@@ -85,13 +86,12 @@ export const ContactDetail: FC<{
         }}
       />
       <div className="actions">
-        <button id="close" className="styledButton" onClick={onClose}>
+        <Button id="close" onClick={onClose}>
           Close
-        </button>
+        </Button>
 
-        <button
+        <Button
           id="add"
-          className="styledButton"
           onClick={() => {
             onSave({
               id: contact.id,
@@ -105,7 +105,7 @@ export const ContactDetail: FC<{
           }}
         >
           Save
-        </button>
+        </Button>
       </div>
     </div>
   );

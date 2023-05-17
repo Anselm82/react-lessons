@@ -5,6 +5,7 @@ import { AddContact } from "../AddContact";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
+import { Button } from "../../components/StyledComponents";
 
 export const Contacts: React.FC = () => {
   const { open, toggle } = useToggleButton();
@@ -24,14 +25,14 @@ export const Contacts: React.FC = () => {
     <main style={styles}>
       <Link to="/"><h1 className="title">MacContactos</h1></Link>
       <SearchBar onSearch={search} />
-      <button onClick={toggleTheme} className="styledButton">
+      <Button onClick={toggleTheme}>
         Change theme to {theme === 'light' ? 'Dark mode' : 'Light mode'}
-      </button>
+      </Button>
       <ContactList contacts={contacts} remove={remove}/>
       {!open ? (
-        <button type="button" onClick={toggle} className="styledButton">
+        <Button type="button" onClick={toggle}>
           Add Contact
-        </button>
+        </Button>
       ) : (
         <AddContact onClose={toggle} onSave={save}/>
       )}
