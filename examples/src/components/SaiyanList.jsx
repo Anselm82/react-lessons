@@ -6,7 +6,7 @@ import SaiyanForm from "./SaiyanForm"
 const SaiyanList = () => {
 
   // --------- Get only saiyans from Redux ---------
-  const saiyans = useSelector(state => state.characters)
+  const saiyans = useSelector(state => state.characters.characters)
 
   return (
     <div>

@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { addSaiyan } from "../actions/characters"
-
+import { addCharacter } from "../slices/characters/charactersSlice"
 const SaiyanForm = () => {
   const [name, setName] = useState("")
   const dispatch = useDispatch()
@@ -12,7 +11,7 @@ const SaiyanForm = () => {
         <input type="text" onChange={e => setName(e.target.value)} />
       </p>
 
-      <button onClick={() => dispatch(addSaiyan(name))}>Añadir nuevo</button>
+      <button onClick={() => dispatch(addCharacter(name))}>Añadir nuevo</button>
     </div>
   )
 }

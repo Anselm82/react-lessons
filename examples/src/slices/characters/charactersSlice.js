@@ -10,7 +10,7 @@ const charactersSlice = createSlice({
   reducers: {
     getCharacters: state => state.characters,
     addCharacter: (state, action) => {
-      state.characters.push(action.payload)
+      state.characters.push({name: action.payload, race: "supersaiyan"})
     }
   }
 })
